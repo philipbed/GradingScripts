@@ -9,7 +9,11 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 #open Chrome and load myCourses
-browser = webdriver.Chrome('C:\chromedriver.exe')
+##browser = webdriver.Chrome('C:\chromedriver.exe')
+##browser.get('https://mycourses.rit.edu')
+
+# open Firefox and load myCourses
+browser = webdriver.Firefox()
 browser.get('https://mycourses.rit.edu')
 
 #login to myCourses
@@ -25,15 +29,24 @@ submit.click()
 #navigate to the proper Lab and filter the students
 input("Please navigate to proper Lab page")
 
-#Check all students 
+#Check all students
+print(list(browser.window_handles))
 check_box = browser.find_element_by_name("z_h_cb_sa")
 check_box.click()
 download_button = browser.find_element_by_class_name("di_t")
 download_button.click()
 
+
 #handle pop-up window
 input("press enter after pop up window appears")
-browser.switch_to_window(browser.window_handles[1]) # problems switching to pop-up window
-zip_link = browser.find_element_by_partial_link_text("Lab")
-#zip_link.click()
-                                                               
+handles = list(browser.window_handles) 
+print(handles)
+handles.remove(browser.current_window_handle)
+print(handles)
+browser.switch_to_window(handles[0])
+print(browser.current_window_handle)
+
+#switches to proper window but cannot find link element
+zip_link = browser.find_element_by_class_name("dfl")
+print(zip_link)
+                                                              
