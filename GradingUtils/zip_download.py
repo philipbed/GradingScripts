@@ -15,11 +15,26 @@ from selenium import webdriver
 class Driver:
 
     def __init__( self, driver=webdriver.Firefox()):
+        """
+        initializes the WebDriver's properties
+
+        driver - preset to the Firefox web browser
+        :return:
+        """
         self.browser = driver
         self.url = driver.current_url
         self.browser.implicitly_wait(10)
 
     def open( self, link ):
+        """
+        Opens the browser of choice and directs you to the site of choice.
+
+        link - the website destination desired.
+        """
+        """
+        :param link:
+        :return:
+        """
         self.browser.get(link)
 
     def login( self ):
@@ -75,33 +90,47 @@ class Driver:
 
 
     def download_all(self):
+        """
+        Clicks the download linke that is present on the page.
+        :return:
+        """
+        """
+        :return:
+        """
         frames = self.browser.find_elements_by_tag_name('frame')
 
+        #Choose the second frame in the popup window.
         frame = frames[1]
         self.browser.switch_to.frame(frame)
-        download = self.browser.find_element_by_css_selector('span.dfl>a')
-        download.click()
+
+        download_link = self.browser.find_element_by_css_selector('span.dfl>a')
+        download_link.click()
 
 
     def navigate_to_lab(self):
-        input("wait then press enter")
+        """
+        Will navigate to the proper lab page using user input.
+        """
+        input("Press 'Enter' after you login: ")
+
+        # Clicks the menu dropdown for the 'Select a course' link
         flyout = self.browser.find_element_by_css_selector("a.d2l-menuflyout-opener.d2l-clickable")
         flyout.click()
 
+        # Clicks the link to go to the CSI page
         computer_science_one = self.browser.find_element_by_partial_link_text("Computer Science I")
         computer_science_one.click()
 
+        # Clicks the dropbox link in the navigation bar
         navbar = self.browser.find_elements_by_css_selector("a.d2l-navbar-link")
         dropbox = navbar[8]
-
         dropbox.click()
+
+        # Selects the current lab that will be graded.
         lab_number = input("what lab number is this?: ")
         lab = self.browser.find_element_by_link_text('Lab '+lab_number)
         lab.click()
 
-
-    def go_to_alert(self):
-        self.browser.switch_to.alert()
 
 
 
