@@ -9,14 +9,10 @@ Author: Philip Bedward
 Date: 9/8/2015
 """
 
-
-
-
-
 from selenium import webdriver
 
 
-class Download:
+class Driver:
 
     def __init__( self, driver=webdriver.Firefox()):
         self.browser = driver
@@ -38,19 +34,6 @@ class Download:
         submit = self.browser.find_element_by_name("f_submit")
         submit.click()
 
-        def navigate_to_lab(self):
-            flyout = self.browser.find_element_by_css_selector("a.d2l-menuflyout-opener.d2l-clickable")
-            flyout.click()
-
-            computer_science_one = self.browser.find_element_by_partial_link_text("Computer Science I")
-            computer_science_one.click()
-
-            navbar = self.browser.find_elements_by_css_selector("a.d2l-navbar-link")
-            dropbox = navbar[8]
-
-            dropbox.click()
-            lab = self.browser.find_element_by_link_text('Lab 1')
-            lab.click()
 
 
     def select_all(self):
@@ -101,6 +84,7 @@ class Download:
 
 
     def navigate_to_lab(self):
+        input("wait then press enter")
         flyout = self.browser.find_element_by_css_selector("a.d2l-menuflyout-opener.d2l-clickable")
         flyout.click()
 
@@ -116,16 +100,8 @@ class Download:
         lab.click()
 
 
+    def go_to_alert(self):
+        self.browser.switch_to.alert()
 
 
-if __name__ == '__main__':
-
-    d = Download()
-    go_to = 'https://mycourses.rit.edu'
-    d.open(go_to)
-    d.login()
-    d.navigate_to_lab()
-    d.select_all()
-    d.change_windows()
-    d.download_all()
 
