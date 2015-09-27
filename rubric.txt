@@ -1,0 +1,18 @@
+Grading Breakdown:
+
+Problem Solving: 20/20
+
+Used recursion: /10
+
+Used iteration: /10
+
+Prompts the user: /5
+
+Error: /5
+
+Functionality: /20
+
+Use of constants: /5
+
+Style: /5
+
